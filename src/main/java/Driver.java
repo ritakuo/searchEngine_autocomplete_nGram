@@ -11,9 +11,7 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import java.io.IOException;
 
-/**
- * Created by ritakuo on 2/2/19.
- */
+
 public class Driver {
     public static void main(String[] args) throws ClassNotFoundException, IOException, InterruptedException{
         Configuration conf1= new Configuration();
@@ -38,7 +36,6 @@ public class Driver {
         job1.waitForCompletion(true);//second job execute after first job finishes
 
         //second job = build language model
-
         Configuration conf2 = new Configuration();
         conf2.set("minCount", args[3]); //words that appear less than minCount will be ignore
         conf2.set("numWordsFollowingInput", args[4]); // ex. numWordsFollowingInput=3, then "I love to eat" will be display as search result

@@ -8,9 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Created by ritakuo on 1/31/19.
- */
+
 public class DBOutputWritable implements Writable, DBWritable {
     private String starting_phrase;
     private String follow_word;

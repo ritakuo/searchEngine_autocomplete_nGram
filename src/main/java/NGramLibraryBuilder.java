@@ -8,9 +8,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 
-/**
- * Created by ritakuo on 1/31/19.
- */
+
 public class NGramLibraryBuilder {
     public static class NGramMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
         int numGram;

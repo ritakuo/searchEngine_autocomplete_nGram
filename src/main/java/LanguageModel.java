@@ -8,9 +8,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * Created by ritakuo on 1/31/19.
- */
+
 public class LanguageModel {
     public static class Map extends Mapper<LongWritable, Text, Text, Text> {
         int minCount;
