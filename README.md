@@ -41,8 +41,6 @@ since today is  1
 today is sunday 1   
 ```
 
-
-
 ## how the code works
 ### arguments:
 - arg0: large data set
@@ -91,8 +89,6 @@ a smart decision 1
 
 The language model computes the probability of a word appearing after a phrase. For example, when user types in the phrase “this is a”, the model would predict the next word to be “smart” based on the N-Gram library we built in the last step. 
 
-- 
-
 
 - The mapper splits the N-Gram library into key and value, where key is the user input (starting word/phrase), and the valus is the following N-Gram with count. To get more accurate result, the N-Gram count ignores phrases that appear below a cetain threshold. 
 
@@ -104,9 +100,11 @@ The language model computes the probability of a word appearing after a phrase. 
 
 #### Predict the next phrase using MySQL
 Write the reducer output to mySQL database. 
+
 ![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-03+at+8.09.31+AM.png)
 
 using mySQL select statement to predict the next phrase 
+
 ![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-03+at+8.09.37+AM.png)
 
 #### Build a search engine with autocomplete feature
