@@ -44,16 +44,17 @@ today is sunday 1
 
 
 ## how the code works
-arguments:
-- arg0: larger data set
+### arguments:
+- arg0: large data set
 - arg1: output path
 - arg2: numGram; number of gram
 - arg3: minCount; the minimun number of occurence for 
 - arg4: numWordsFollowingInput, when type a word, how many words you want to see in result
 
 ### two mapreduce job 
-####Build NGram Library 
-- build n gram library. numGram = 3
+#### Job 1 Build NGram Library 
+- take a input (large data set), build n gram library. (in this project, nGram = 3) 
+
 
 The Mapper split each sentence into 2-Gram and 3-Gram 
 ```
@@ -86,46 +87,28 @@ a smart decision 1
 ```
 
 
-
-####Build Language Model
+#### Job 2: Build Language Model
 
 The language model computes the probability of a word appearing after a phrase. For example, when user types in the phrase “this is a”, the model would predict the next word to be “smart” based on the N-Gram library we built in the last step. 
 
+- 
 
-The mapper splits the N-Gram library into key and value, where key is the user input (starting word/phrase), and the valus is the following N-Gram with count. To get more accurate result, the N-Gram count ignores phrases that appear below a cetain threshold. 
 
-The reducer merges the mapper output into a table that has the probability of each phrase appearing after each user input. For a given phrase, we store only the top 5 words with the highest probabilities . If two words have the same probability, choose the one which is lexicographically higher i.e. 'ab' comes before 'bc'.
+- The mapper splits the N-Gram library into key and value, where key is the user input (starting word/phrase), and the valus is the following N-Gram with count. To get more accurate result, the N-Gram count ignores phrases that appear below a cetain threshold. 
+
+- The reducer merges the mapper output into a table that has the probability of each phrase appearing after each user input. For a given phrase, we store only the top 5 words with the highest probabilities . If two words have the same probability, choose the one which is lexicographically higher i.e. 'ab' comes before 'bc'.
 
 
 ![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-03+at+7.53.47+AM.png)
 
 
+#### Predict the next phrase using MySQL
+Write the reducer output to mySQL database. 
+![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-03+at+8.09.31+AM.png)
 
-```$xslt
-                      mapper
-NGramLibraryBuilder =====================>  
+using mySQL select statement to predict the next phrase 
+![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-03+at+8.09.37+AM.png)
 
-I ate an apple         
-						I ate an ,1 
-						I ate an apple ,1
-						 ate an apple,1 
-		
+#### Build a search engine with autocomplete feature
+autocomplete feature for the search engine. As soon as the user enters a word into the input field, the browser will issue an AJAX request to the MySQL server by passing the current content of that field as the parameters. The MySQL server will evaluate the content and returns a list of suggestions to the browser. The browser then displays a list of words below the input field that offers the suggestions to the user. If user clicks on one of the suggestions, it will be copied into the search engine input field. 
 
-```
-only take account words that has length > numGram. for ex, if numGram =2
-```$xslt
-I => not qualify
-I am => not qualify
-I am an => qualify
-```
-only take account of sentence that happen more than minCount time, for ex, if minCount>2
-```$xslt
-I am an
-I am an
-I am an
-I was an
-I was an
-=>
-
-only "I am an" qualifies 
-```
