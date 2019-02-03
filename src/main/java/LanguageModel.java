@@ -1,12 +1,21 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeMap;
+
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 
-import java.io.IOException;
-import java.util.*;
 
 
 public class LanguageModel {
@@ -15,15 +24,15 @@ public class LanguageModel {
 
         public void setup(Context context) {
             Configuration conf = context.getConfiguration();
-            minCount = conf.getInt("minCount", 10); //default to 10
+            minCount = conf.getInt("minCount", 5);
         }
 
         //ex input: this is cool \t20
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             if ((value == null || value.toString().trim().length() == 0)) return;
             String thisLine = value.toString().trim();
-            String[] wordsAndCount = thisLine.split("\\s+"); //split line by tab/space
-            String[] words = wordsAndCount[0].split("\\s+");
+            String[] wordsAndCount = thisLine.split("\t"); //split by tab
+            String[] words = wordsAndCount[0].split("\\s+"); //split each word by space
             int count = Integer.valueOf(wordsAndCount[wordsAndCount.length - 1]);
             if ((wordsAndCount.length < 2 || count <= minCount)) return;
 
@@ -46,7 +55,7 @@ public class LanguageModel {
             numWordsFollowingInput = conf.getInt("numWordFollowingInput", 5);
         }
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException{
-            //sort key indescending order
+            //sort key in descending order
             TreeMap <Integer, List<String>> map = new TreeMap<Integer, List<String>>(Collections.reverseOrder());
             for(Text val: values){
                 String curVal= val.toString().trim();

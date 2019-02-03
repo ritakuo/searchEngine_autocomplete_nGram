@@ -19,7 +19,7 @@ public class NGramLibraryBuilder {
         }
 
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-            String thisLine = value.toString().trim().toLowerCase().replaceAll("[^a-z]+", "");
+            String thisLine = value.toString().trim().toLowerCase().replaceAll("[^a-z]+", " ");
             String[] wordsInLine = thisLine.split("\\s+");//group all whilespace as delimiter
             if (wordsInLine.length < 2) return;
 
@@ -46,5 +46,4 @@ public class NGramLibraryBuilder {
         }
     }
 }
-
 
