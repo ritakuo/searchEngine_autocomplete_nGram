@@ -120,6 +120,7 @@ My suggested integrating steps:
 1. work with local mysql db (ex. MAMP) and local code
 2. work with RDS(mysql) and EMR
 3. stop EMR and RDS
+4. build frontend
 
 ### local mysql DB and local code
 1. clone this repo, let maven resolve depency with pom.xml, build jar
@@ -143,10 +144,12 @@ java -jar autocomplete_ngram-1.0-SNAPSHOT.jar ../bookList ../output 2 3 4
 ### AWS RDS and EMR
 1. setup AWS RDS MySQL, free tier should be sufficient for this project
 2. change the security group so inbound mysql connection is from everywhere ( Warning: this is not a production ready setup)
+
 ![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-06+at+8.13.15+AM.png)
+
 3. setup RDS 
 - Note: RDS doesn't allow certain privileges being applied to the information tables, even by root user. Instead, choose the privileges you need. 
-![Credit from here](https://www.flydata.com/blog/access-denied-issue-amazon-rds)
+[Learned from here](https://www.flydata.com/blog/access-denied-issue-amazon-rds)
 
 ```
 ## enter mysql 
@@ -164,8 +167,8 @@ FLUSH PRIVILEGES;
 - Create a EC2 keypair PEM file to used for EMR
 - Create a S3 bucket  
 - Upload the jar in this repo to your s3 bucket ( You can make change and compile your own as well)
--  Upload the input files to the same s3 bucket 
-- Create a EMR cluster, choose EMR version that uses hadoop version 2.7.3 (to use a different hadoop version, change the pom.xml)
+- Upload the input files to the same s3 bucket 
+- Create a EMR cluster, choose EMR version that uses hadoop version 2.7.3 (to use a different hadoop version, change the pom.xml) 
 - wait for EMR provision finish:
 - add a step for custom jar. for JAR location, point to the jar in the s3 bucket. for argument:
 ```
@@ -176,6 +179,7 @@ s3://my.mapreducebucket/wikipedia_data /out 3 4 5
 
 ```
 8. After job complete, check it writes to RDS output table
+
 ![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-06+at+8.35.11+AM.png)
 
 9. if wish to perform frontend section, perform database dump and then terminate RDS 
@@ -185,7 +189,7 @@ mysqldump -h <rds-endpoint> -u <db-user-name> -p --port=<your-port> --databases 
 
 ### Frontend 
 I build my frontend with code inspired from [here](http://www.bewebdeveloper.com/tutorial-about-autocomplete-using-php-mysql-and-jquery). 
-I host the mysql app [here](https://www.000webhost.com/cpanel-login) 
+I host the mysql app [here](https://www.000webhost.com/cpanel-login) for free
 
 
 
