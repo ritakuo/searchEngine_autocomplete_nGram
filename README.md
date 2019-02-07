@@ -4,7 +4,7 @@ a demonstration of Autocomplete feature using nGram algorithm
 ## tl&dr
 - this is a full stack project(backend, frontend, database) that will demonstrate the search engine autocomplete feature
 - I use AWS EMR, S3, RDS to get the output, but you can use any infrastrure. 
-- VERY IMPORTANT: if you uses AWS EMR like I do, Remember to TERMINATE instances when you done. (I got charged $60 USD for it just in 2 days :( )
+- VERY IMPORTANT: if you uses AWS EMR like I do, Remember to TERMINATE instances after job complete. 
 
 
 ## about nGram
@@ -180,7 +180,7 @@ s3://my.mapreducebucket/wikipedia_data /out 3 4 5
 ```
 8. After job complete, check it writes to RDS output table
 
-![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-06+at+8.35.11+AM.png)
+![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-07+at+9.33.10+AM.png)
 
 9. if wish to perform frontend section, perform database dump and then terminate RDS 
 ```
