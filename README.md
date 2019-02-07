@@ -184,10 +184,8 @@ mysqldump -h <rds-endpoint> -u <db-user-name> -p --port=<your-port> --databases 
 ```
 
 ### Frontend 
-I build my frontend with code inspired from
-![here](http://www.bewebdeveloper.com/tutorial-about-autocomplete-using-php-mysql-and-jquery). 
-I host the mysql app 
-![here](https://www.000webhost.com/cpanel-login) 
+I build my frontend with code inspired from [here](http://www.bewebdeveloper.com/tutorial-about-autocomplete-using-php-mysql-and-jquery). 
+I host the mysql app [here](https://www.000webhost.com/cpanel-login) 
 
 
 
