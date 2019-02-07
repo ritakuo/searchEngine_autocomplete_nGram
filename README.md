@@ -4,7 +4,7 @@ a demonstration of Autocomplete feature using nGram algorithm
 ## tl&dr
 - this is a full stack project(backend, frontend, database) that will demonstrate the search engine autocomplete feature
 - I use AWS EMR, S3, RDS to get the output, but you can use any infrastrure. 
-- VERY IMPORTANT: if you uses AWS EMR like I do, Remember to TERMINATE instances after job complete. 
+- VERY IMPORTANT: if you use AWS EMR like I do, Remember to TERMINATE instances after job complete. 
 
 
 ## about nGram
