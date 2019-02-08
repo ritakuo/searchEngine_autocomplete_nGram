@@ -164,7 +164,8 @@ CREATE USER 'emr'@'%' IDENTIFIED BY 'password';
 grant select,insert,update,delete,create,drop on *.* to 'emr'@'%';
 FLUSH PRIVILEGES;
 ```
-3. Setup EMR
+
+4. Setup EMR
 - Create a EC2 keypair PEM file to used for EMR
 - Create a S3 bucket  
 - Upload the jar in this repo to your s3 bucket ( You can make change and compile your own as well)
@@ -179,11 +180,11 @@ example:
 s3://my.mapreducebucket/wikipedia_data /out 3 4 5  
 
 ```
-8. After job complete, check it writes to RDS output table
+5. After job complete, check it writes to RDS output table
 
 ![](https://s3-us-west-2.amazonaws.com/donot-delete-github-image/Screen+Shot+2019-02-07+at+9.33.10+AM.png)
 
-9. if wish to perform frontend section, perform database dump and then terminate RDS 
+6. if wish to perform frontend section, perform database dump and then terminate RDS 
 ```
 mysqldump -h <rds-endpoint> -u <db-user-name> -p --port=<your-port> --databases <your-database >> datadump.sql
 ```
