@@ -1,5 +1,6 @@
 # AutoComplete feature using nGram algorithm
 a demonstration of Autocomplete feature using nGram algorithm 
+https://bit.ly/2Decuh7
 
 ## tl&dr
 - this is a full stack project(backend, frontend, database) that will demonstrate the search engine autocomplete feature
@@ -190,7 +191,7 @@ mysqldump -h <rds-endpoint> -u <db-user-name> -p --port=<your-port> --databases 
 ### Frontend 
 I build my frontend with code inspired from [here](http://www.bewebdeveloper.com/tutorial-about-autocomplete-using-php-mysql-and-jquery). 
 I host the mysql app [here](https://www.000webhost.com/cpanel-login) for free
-
+[Demo for this project](https://bit.ly/2Decuh7)
 
 
 
